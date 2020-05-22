@@ -1,7 +1,7 @@
-use volatile::Volatile;
 use core::fmt;
 use lazy_static::lazy_static;
 use spin::Mutex;
+use volatile::Volatile;
 
 #[allow(dead_code)]
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -27,11 +27,11 @@ pub enum Color {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 #[repr(transparent)]
-struct ColorCode (u8);
+struct ColorCode(u8);
 
 impl ColorCode {
-    fn new (foreground: Color, background: Color) -> ColorCode {
-        ColorCode((background as u8 ) << 4 | (foreground as u8))
+    fn new(foreground: Color, background: Color) -> ColorCode {
+        ColorCode((background as u8) << 4 | (foreground as u8))
     }
 }
 
@@ -89,7 +89,8 @@ impl Writer {
         }
     }
 
-    fn new_line(&mut self) {for row in 1..BUFFER_HEIGHT {
+    fn new_line(&mut self) {
+        for row in 1..BUFFER_HEIGHT {
             for col in 0..BUFFER_WIDTH {
                 let character = self.buffer.chars[row][col].read();
                 self.buffer.chars[row - 1][col].write(character);
@@ -153,14 +154,14 @@ pub fn print_something() {
 
     writer.write_byte(b'H');
     writer.write_string("ello! ");
-    write!(writer, "The numbers are {} and {}", 42, 1.0/3.0).unwrap();
+    write!(writer, "The numbers are {} and {}", 42, 1.0 / 3.0).unwrap();
 }
 
 #[cfg(test)]
 use crate::{serial_print, serial_println};
 
 #[test_case]
-fn test_println_simple(){
+fn test_println_simple() {
     serial_print!("test_println... ");
     println!("test_println_simple output");
     serial_println!("[ok]");
