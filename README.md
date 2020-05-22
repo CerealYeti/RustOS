@@ -2,7 +2,7 @@ This a repository for an independent school project to build an basic Operating 
 
 Resources:
   
-  https://os.phil-opp.com/hardware-interrupts/
+  https://os.phil-opp.com/
   
   https://doc.rust-lang.org/book/
   
